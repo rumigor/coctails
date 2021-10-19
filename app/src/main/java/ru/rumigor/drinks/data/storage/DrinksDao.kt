@@ -15,8 +15,8 @@ interface DrinksDao {
     @Query("SELECT * FROM drinks")
     fun fetchDrinks(): Observable<List<Drink>>
 
-    @Query("SELECT * FROM drinks WHERE strDrink LIKE :strDrink LIMIT 1")
-    fun fetchDrinksByName(strDrink: String): Single<Drink>
+    @Query("SELECT * FROM drinks WHERE idDrink LIKE :idDrink LIMIT 1")
+    fun fetchDrinksByName(idDrink: String): Single<Drink>
 
     @Insert(onConflict = REPLACE)
     fun retain(drinks: List<Drink>): Completable

@@ -9,6 +9,7 @@ import io.reactivex.rxkotlin.plusAssign
 import ru.rumigor.drinks.data.drinks.DrinksRepository
 import ru.rumigor.drinks.scheduler.Schedulers
 import ru.rumigor.drinks.ui.DrinksViewModel
+import ru.rumigor.drinks.ui.drink.DrinkScreen
 
 class DrinksPresenter(
     private val drinksRepository: DrinksRepository,
@@ -32,9 +33,9 @@ class DrinksPresenter(
                 )
     }
 
-//    fun displayUser(drinks: DrinksViewModel) {
-//        router.navigateTo(UserScreen(user.login))
-//    }
+    fun displayDrink(drink: DrinksViewModel) {
+        router.navigateTo(DrinkScreen(drink.idDrink))
+    }
 
     override fun onDestroy() {
         disposables.dispose()

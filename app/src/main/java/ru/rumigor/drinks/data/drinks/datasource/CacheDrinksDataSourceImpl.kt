@@ -13,12 +13,12 @@ class CacheDrinksDataSourceImpl @Inject constructor(
 
     override fun getDrinks(): Observable<List<Drink>> =
         drinksStorage
-            .driksDao()
+            .drinksDao()
             .fetchDrinks()
 
     override fun retain(drinks: List<Drink>): Single<List<Drink>> =
         drinksStorage
-            .driksDao()
+            .drinksDao()
             .retain(drinks)
             .andThen(getDrinks().firstOrError())
 

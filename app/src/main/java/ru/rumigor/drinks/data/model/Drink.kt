@@ -13,7 +13,13 @@ data class Drink(
     @ColumnInfo(name = "strDrink")
     @SerializedName("strDrink")
     val strDrink: String,
+    @ColumnInfo(name = "strAlcoholic")
+    @SerializedName("strAlcoholic")
+    val strAlcoholic: String,
+    @ColumnInfo(name = "strInstructions")
+    @SerializedName("strInstructions")
+    val strInstructions: String,
     @ColumnInfo(name = "avatar")
     @SerializedName("strDrinkThumb")
-    val strDrinkThumb: String,
+    val strDrinkThumb: String
 )

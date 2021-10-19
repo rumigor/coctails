@@ -14,11 +14,12 @@ import ru.rumigor.drinks.scheduler.Schedulers
 
 @Component(
     modules = [AndroidInjectionModule::class, DrinksApplicationModule::class, DrinksApiModule::class,
-    DrinksModule::class, DrinksRepositoryModule::class]
+    DrinksModule::class, DrinksRepositoryModule::class, DrinkModule::class, DrinkRepositoryModule::class]
 )
 interface DrinksApplicationComponent: AndroidInjector<DrinksApp> {
 
     fun drinksComponent(): DrinksComponent.Builder
+    fun drinkComponent(): DrinkComponent.Builder
 
     @Component.Builder
     interface Builder{

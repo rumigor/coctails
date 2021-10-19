@@ -23,7 +23,7 @@ import ru.rumigor.drinks.scheduler.Schedulers
 import ru.rumigor.drinks.ui.DrinksViewModel
 import javax.inject.Inject
 
-class DrinksFragment: MvpAppCompatFragment(R.layout.view_drinks), DrinksView {
+class DrinksFragment: MvpAppCompatFragment(R.layout.view_drinks), DrinksView, DrinksAdapter.Delegate {
 
     companion object {
 
@@ -51,7 +51,7 @@ class DrinksFragment: MvpAppCompatFragment(R.layout.view_drinks), DrinksView {
     }
 
     private val viewBinding: ViewDrinksBinding by viewBinding()
-    private val drinksAdapter = DrinksAdapter()
+    private val drinksAdapter = DrinksAdapter(delegate = this)
 
     private var drinksComponent: DrinksComponent? = null
 
@@ -81,12 +81,14 @@ class DrinksFragment: MvpAppCompatFragment(R.layout.view_drinks), DrinksView {
         Log.d("ERROR", error.message.toString())
     }
 
-//    override fun onUserPicked(user: GitHubUserViewModel) =
-//        presenter.displayUser(user)
 
     override fun onDestroy() {
         super.onDestroy()
         drinksComponent = null
+    }
+
+    override fun onDrinkPicked(drink: DrinksViewModel) {
+        presenter.displayDrink(drink)
     }
 
 }

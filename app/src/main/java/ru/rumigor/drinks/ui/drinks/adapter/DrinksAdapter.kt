@@ -7,8 +7,12 @@ import ru.rumigor.drinks.R
 import ru.rumigor.drinks.ui.DrinksViewModel
 
 
-class DrinksAdapter() :
+class DrinksAdapter(private  val delegate: Delegate?) :
     ListAdapter<DrinksViewModel, DrinkViewHolder>(DrinkDiff) {
+
+    interface Delegate{
+        fun onDrinkPicked(drink: DrinksViewModel)
+    }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DrinkViewHolder =
@@ -19,6 +23,6 @@ class DrinksAdapter() :
         )
 
     override fun onBindViewHolder(holder: DrinkViewHolder, position: Int) =
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), delegate)
 
 }
