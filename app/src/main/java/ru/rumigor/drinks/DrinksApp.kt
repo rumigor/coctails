@@ -12,7 +12,7 @@ import ru.rumigor.drinks.scheduler.DefaultSchedulers
 class DrinksApp: DaggerApplication() {
     override fun applicationInjector(): AndroidInjector<DrinksApp> = drinksApplicationComponent
 
-    val drinksApplicationComponent: DrinksApplicationComponent by lazy {
+    private val drinksApplicationComponent: DrinksApplicationComponent by lazy {
         DaggerDrinksApplicationComponent
             .builder()
             .withContext(applicationContext)

@@ -10,16 +10,15 @@ import dagger.android.AndroidInjector
 import ru.rumigor.drinks.DrinksApp
 import ru.rumigor.drinks.data.di.modules.*
 import ru.rumigor.drinks.scheduler.Schedulers
+import javax.inject.Singleton
 
 
+@Singleton
 @Component(
-    modules = [AndroidInjectionModule::class, DrinksApplicationModule::class, DrinksApiModule::class,
-    DrinksModule::class, DrinkModule::class, DrinkRepositoryModule::class]
+    modules = [AndroidInjectionModule::class,  DrinksApiModule::class,
+    DrinksModule::class, DrinksStorageModule::class]
 )
 interface DrinksApplicationComponent: AndroidInjector<DrinksApp> {
-
-    fun drinksComponent(): DrinksComponent.Builder
-    fun drinkComponent(): DrinkComponent.Builder
 
     @Component.Builder
     interface Builder{
