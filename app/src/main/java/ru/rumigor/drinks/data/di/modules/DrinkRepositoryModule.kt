@@ -9,8 +9,5 @@ import ru.rumigor.drinks.data.drink.datasource.CacheDrinkDataSourceImpl
 
 @Module(includes = [DrinksStorageModule::class])
 interface DrinkRepositoryModule {
-    @Binds
-    fun bindDrinkRepository(repository: DrinkRepositoryImpl): DrinkRepository
-    @Binds
-    fun bindCacheDrinkDataSource(dataSource: CacheDrinkDataSourceImpl): CacheDrinkDataSource
+
 }

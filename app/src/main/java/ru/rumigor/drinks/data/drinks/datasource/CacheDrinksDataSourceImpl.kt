@@ -1,5 +1,6 @@
 package ru.rumigor.drinks.data.drinks.datasource
 
+import io.reactivex.Maybe
 import io.reactivex.Observable
 import io.reactivex.Single
 import ru.rumigor.drinks.data.InMemory
@@ -22,4 +23,14 @@ class CacheDrinksDataSourceImpl @Inject constructor(
             .retain(drinks)
             .andThen(getDrinks().firstOrError())
 
+    override fun retain(drink: Drink): Single<Drink> =
+        drinksStorage
+            .drinksDao()
+            .retain(drink)
+            .andThen(Single.just(drink))
+
+    override fun getDrinkByName(idDrink: String): Maybe<Drink> = drinksStorage
+            .drinksDao()
+            .fetchDrinksByName(idDrink)
+            .toMaybe()
 }

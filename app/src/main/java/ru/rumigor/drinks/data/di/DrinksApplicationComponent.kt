@@ -14,7 +14,7 @@ import ru.rumigor.drinks.scheduler.Schedulers
 
 @Component(
     modules = [AndroidInjectionModule::class, DrinksApplicationModule::class, DrinksApiModule::class,
-    DrinksModule::class, DrinksRepositoryModule::class, DrinkModule::class, DrinkRepositoryModule::class]
+    DrinksModule::class, DrinkModule::class, DrinkRepositoryModule::class]
 )
 interface DrinksApplicationComponent: AndroidInjector<DrinksApp> {
 

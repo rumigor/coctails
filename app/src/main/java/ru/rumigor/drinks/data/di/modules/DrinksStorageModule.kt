@@ -15,6 +15,7 @@ class DrinksStorageModule {
     @Provides
     fun provideDrinksDatabaseStorage(context: Context): DrinksStorage =
         Room.databaseBuilder(context, DrinksStorage::class.java, "drinks.db")
+            .fallbackToDestructiveMigration()
             .build()
 
     @InMemory
