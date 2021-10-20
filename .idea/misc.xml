@@ -3,7 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/rumig/AndroidStudioProjects/coctails2/app/src/main/res/layout/view_drink_fragment.xml" value="0.13020833333333334" />
+        <entry key="..\:/Users/LEP/Documents/coctails/app/src/main/res/layout/activity_main.xml" value="0.20572916666666666" />
+        <entry key="..\:/Users/LEP/Documents/coctails/app/src/main/res/layout/view_drink.xml" value="0.20572916666666666" />
+        <entry key="..\:/Users/LEP/Documents/coctails/app/src/main/res/layout/view_drink_fragment.xml" value="0.20572916666666666" />
+        <entry key="..\:/Users/LEP/Documents/coctails/app/src/main/res/layout/view_drinks.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/LEP/Documents/coctails/app/src/main/res/layout/view_main_fragment.xml" value="0.2015625" />
       </map>
     </option>
   </component>

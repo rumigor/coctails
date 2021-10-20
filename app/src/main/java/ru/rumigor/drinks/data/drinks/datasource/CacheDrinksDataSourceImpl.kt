@@ -1,5 +1,6 @@
 package ru.rumigor.drinks.data.drinks.datasource
 
+import io.reactivex.Completable
 import io.reactivex.Maybe
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -17,6 +18,14 @@ class CacheDrinksDataSourceImpl @Inject constructor(
             .drinksDao()
             .fetchDrinks()
 
+    override fun getDrinkByName(drinkName: String): Observable<List<Drink>> =
+        drinksStorage
+            .drinksDao()
+            .fetchDrinks()
+
+    override fun getRandomDrinks(): Observable<List<Drink>> =
+        getDrinks()
+
     override fun retain(drinks: List<Drink>): Single<List<Drink>> =
         drinksStorage
             .drinksDao()
@@ -29,8 +38,13 @@ class CacheDrinksDataSourceImpl @Inject constructor(
             .retain(drink)
             .andThen(Single.just(drink))
 
-    override fun getDrinkByName(idDrink: String): Maybe<Drink> = drinksStorage
+    override fun getDrinkById(idDrink: String): Maybe<Drink> = drinksStorage
             .drinksDao()
-            .fetchDrinksByName(idDrink)
+            .fetchDrinksById(idDrink)
             .toMaybe()
+
+    override fun clearCache(): Completable =
+            drinksStorage
+                .drinksDao()
+                .deleteAll()
 }

@@ -17,7 +17,7 @@ class DrinkPresenter(
     override fun onFirstViewAttach() {
         disposables +=
             drinksRepository
-                .getDrinkByName(drinkName)
+                .getDrinkById(drinkName)
                 .map(DrinksViewModel.Mapper::map)
                 .observeOn(schedulers.main())
                 .subscribeOn(schedulers.background())

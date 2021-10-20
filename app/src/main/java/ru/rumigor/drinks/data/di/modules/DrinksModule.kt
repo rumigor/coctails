@@ -13,6 +13,7 @@ import ru.rumigor.drinks.data.drinks.datasource.DrinksDataSource
 import ru.rumigor.drinks.ui.MainActivity
 import ru.rumigor.drinks.ui.drink.DrinkFragment
 import ru.rumigor.drinks.ui.drinks.DrinksFragment
+import ru.rumigor.drinks.ui.main.MainFragment
 import javax.inject.Singleton
 
 @Module
@@ -24,6 +25,8 @@ interface DrinksModule{
     fun bindDrinksFragment(): DrinksFragment
     @ContributesAndroidInjector
     fun bindDrinkFragment(): DrinkFragment
+    @ContributesAndroidInjector
+    fun bindMainFragment(): MainFragment
 
     @Singleton
     @Binds

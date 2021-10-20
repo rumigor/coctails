@@ -14,6 +14,7 @@ import ru.rumigor.drinks.data.network.NetworkState
 import ru.rumigor.drinks.data.network.NetworkStateObservable
 import ru.rumigor.drinks.ui.abs.AbsActivity
 import ru.rumigor.drinks.ui.drinks.DrinksScreen
+import ru.rumigor.drinks.ui.main.MainScreen
 
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -37,7 +38,7 @@ class MainActivity : AbsActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        savedInstanceState ?: router.newRootScreen(DrinksScreen)
+        savedInstanceState ?: router.newRootScreen(MainScreen)
 
         val connect =
             NetworkStateObservable(this)

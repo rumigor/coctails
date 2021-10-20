@@ -24,5 +24,4 @@ class DrinksAdapter(private  val delegate: Delegate?) :
 
     override fun onBindViewHolder(holder: DrinkViewHolder, position: Int) =
         holder.bind(getItem(position), delegate)
-
 }

@@ -1,5 +1,6 @@
 package ru.rumigor.drinks.data.drinks
 
+import io.reactivex.Completable
 import io.reactivex.Maybe
 import io.reactivex.Observable
 import ru.rumigor.drinks.data.drinks.datasource.CacheDrinksDataSource
@@ -17,6 +18,21 @@ class DrinksRepositoryImpl @Inject constructor(
             cloud.getDrinks().flatMapSingle(cache::retain)
         )
 
-    override fun getDrinkByName(drinkID: String): Maybe<Drink> =
-        cache.getDrinkByName(drinkID)
+    override fun getDrinkById(drinkID: String): Maybe<Drink> =
+        cache.getDrinkById(drinkID)
+
+    override fun getDrinkByName(drinkName: String): Observable<List<Drink>> =
+        Observable.merge(
+            cache.getDrinkByName(drinkName),
+            cloud.getDrinkByName(drinkName).flatMapSingle(cache::retain)
+        )
+
+    override fun getRandomDrinks(): Observable<List<Drink>> =
+        Observable.merge(
+            cache.getRandomDrinks(),
+            cloud.getRandomDrinks().flatMapSingle(cache::retain)
+        )
+
+    override fun clearCache(): Completable =
+        cache.clearCache()
 }

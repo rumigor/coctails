@@ -47,7 +47,7 @@
                     android:layout_weight="1"
                     android:paddingTop="8pt"
                     android:paddingBottom="8pt"
-                    android:text="Alcoholic/Non-Alcoholic:"
+                    android:text="@string/alcoholic_non_alcoholic"
                     android:textSize="20sp" />
 
                 <TextView
@@ -62,12 +62,20 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/ingredients"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/ingredients"
+                android:textSize="16sp"
+                android:textStyle="italic" />
+
+            <TextView
                 android:id="@+id/instrTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:paddingBottom="8pt"
-                android:text="How to make:"
+                android:text="@string/how_to_make"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 

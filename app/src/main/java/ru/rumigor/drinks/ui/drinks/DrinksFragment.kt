@@ -18,16 +18,22 @@ import ru.rumigor.drinks.databinding.ViewDrinksBinding
 import ru.rumigor.drinks.scheduler.Schedulers
 import ru.rumigor.drinks.ui.DrinksViewModel
 import ru.rumigor.drinks.ui.abs.AbsFragment
+import ru.rumigor.drinks.ui.drink.DrinkFragment
 import javax.inject.Inject
 
 class DrinksFragment: AbsFragment(R.layout.view_drinks), DrinksView, DrinksAdapter.Delegate {
 
     companion object {
 
-        fun newInstance(): Fragment =
-            DrinksFragment()
-                .arguments()
+        private const val ARG_DRINK_NAME = "arg_drink_name"
 
+        fun newInstance(drinkName: String): Fragment =
+            DrinksFragment()
+                .arguments(ARG_DRINK_NAME to drinkName)
+    }
+
+    private val drinkName: String by lazy {
+        arguments?.getString(ARG_DRINK_NAME).orEmpty()
     }
 
     @Inject
@@ -43,7 +49,8 @@ class DrinksFragment: AbsFragment(R.layout.view_drinks), DrinksView, DrinksAdapt
         DrinksPresenter(
             drinksRepository = drinksRepository,
             router = router,
-            schedulers = schedulers
+            schedulers = schedulers,
+            drinkName = drinkName
         )
     }
 
@@ -69,6 +76,7 @@ class DrinksFragment: AbsFragment(R.layout.view_drinks), DrinksView, DrinksAdapt
     override fun onDrinkPicked(drink: DrinksViewModel) {
         presenter.displayDrink(drink)
     }
+
 
 }
 

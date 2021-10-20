@@ -18,7 +18,7 @@ class DrinksApiModule {
 
     @Named("drinks_api")
     @Provides
-    fun provideBaseUrlProd(): String = "https://the-cocktail-db.p.rapidapi.com/popular.php/"
+    fun provideBaseUrlProd(): String = "https://the-cocktail-db.p.rapidapi.com/"
 
 
     @Reusable

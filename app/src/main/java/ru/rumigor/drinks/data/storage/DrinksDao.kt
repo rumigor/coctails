@@ -1,10 +1,7 @@
 package ru.rumigor.drinks.data.storage
 
-import androidx.room.Dao
-import androidx.room.Insert
+import androidx.room.*
 import androidx.room.OnConflictStrategy.REPLACE
-import androidx.room.Query
-import androidx.room.Update
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -16,10 +13,18 @@ interface DrinksDao {
     fun fetchDrinks(): Observable<List<Drink>>
 
     @Query("SELECT * FROM drinks WHERE idDrink LIKE :idDrink LIMIT 1")
-    fun fetchDrinksByName(idDrink: String): Single<Drink>
+    fun fetchDrinksById(idDrink: String): Single<Drink>
+
+//    @Query("SELECT * FROM drinks WHERE strDrink LIKE :drinkName")
+//    fun fetchDrinksByName(drinkName: String): Observable<List<Drink>>
+
+    @Query("DELETE FROM drinks")
+    fun deleteAll(): Completable
+
 
     @Insert(onConflict = REPLACE)
     fun retain(drinks: List<Drink>): Completable
     @Update(onConflict = REPLACE)
     fun retain(drink: Drink): Completable
+
 }
