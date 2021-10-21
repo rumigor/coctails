@@ -61,5 +61,9 @@ fun TextView.setCompoundDrawable(
 
 fun Int.dp(context: Context): Int =
     TypedValue
-        .applyDimension(TypedValue.COMPLEX_UNIT_DIP, this.toFloat(), context.resources.displayMetrics)
+        .applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP,
+            this.toFloat(),
+            context.resources.displayMetrics
+        )
         .roundToInt()

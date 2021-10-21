@@ -7,10 +7,10 @@ import ru.rumigor.drinks.R
 import ru.rumigor.drinks.ui.DrinksViewModel
 
 
-class DrinksAdapter(private  val delegate: Delegate?) :
+class DrinksAdapter(private val delegate: Delegate?) :
     ListAdapter<DrinksViewModel, DrinkViewHolder>(DrinkDiff) {
 
-    interface Delegate{
+    interface Delegate {
         fun onDrinkPicked(drink: DrinksViewModel)
     }
 

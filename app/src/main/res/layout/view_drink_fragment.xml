@@ -31,22 +31,24 @@
                 android:id="@+id/drinkPic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="8pt"
+                android:paddingBottom="2pt"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <LinearLayout
                 android:id="@+id/AlcProp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingStart="1pt">
 
                 <TextView
                     android:id="@+id/alcStatusTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:paddingTop="8pt"
-                    android:paddingBottom="8pt"
+                    android:paddingStart="1pt"
+                    android:paddingTop="2pt"
+                    android:paddingBottom="2pt"
                     android:text="@string/alcoholic_non_alcoholic"
                     android:textSize="20sp" />
 
@@ -55,6 +57,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:paddingStart="1pt"
                     android:paddingTop="8pt"
                     android:paddingBottom="8pt"
                     android:text="TextView"
@@ -65,6 +68,7 @@
                 android:id="@+id/ingredients"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingStart="1pt"
                 android:text="@string/ingredients"
                 android:textSize="16sp"
                 android:textStyle="italic" />
@@ -74,7 +78,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:paddingBottom="8pt"
+                android:paddingStart="1pt"
+                android:paddingBottom="2pt"
                 android:text="@string/how_to_make"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -83,6 +88,7 @@
                 android:id="@+id/instruction"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingStart="1pt"
                 android:text="TextView"
                 android:textSize="16sp"
                 android:textStyle="italic" />

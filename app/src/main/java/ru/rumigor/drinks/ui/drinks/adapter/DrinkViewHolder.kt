@@ -8,7 +8,7 @@ import ru.rumigor.drinks.databinding.ViewDrinkBinding
 import ru.rumigor.drinks.setStartDrawableCircleImageFromUri
 import ru.rumigor.drinks.ui.DrinksViewModel
 
-class DrinkViewHolder(view: View): ViewHolder(view) {
+class DrinkViewHolder(view: View) : ViewHolder(view) {
 
     private val viewBinding: ViewDrinkBinding by viewBinding()
 

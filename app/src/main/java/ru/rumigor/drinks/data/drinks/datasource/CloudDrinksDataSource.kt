@@ -1,6 +1,5 @@
 package ru.rumigor.drinks.data.drinks.datasource
 
-import io.reactivex.Maybe
 import io.reactivex.Observable
 import ru.rumigor.drinks.data.InMemory
 import ru.rumigor.drinks.data.api.DrinksApi

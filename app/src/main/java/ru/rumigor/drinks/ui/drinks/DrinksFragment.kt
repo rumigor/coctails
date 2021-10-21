@@ -21,7 +21,7 @@ import ru.rumigor.drinks.ui.abs.AbsFragment
 import ru.rumigor.drinks.ui.drink.DrinkFragment
 import javax.inject.Inject
 
-class DrinksFragment: AbsFragment(R.layout.view_drinks), DrinksView, DrinksAdapter.Delegate {
+class DrinksFragment : AbsFragment(R.layout.view_drinks), DrinksView, DrinksAdapter.Delegate {
 
     companion object {
 
@@ -68,8 +68,15 @@ class DrinksFragment: AbsFragment(R.layout.view_drinks), DrinksView, DrinksAdapt
     }
 
     override fun showError(error: Throwable) {
-        Toast.makeText(requireContext(), error.message, Toast.LENGTH_LONG).show()
+        if (error.message == "The mapper function returned a null value.") {
+            Toast.makeText(
+                requireContext(),
+                "Sorry, we can't find recipe for this drink:(",
+                Toast.LENGTH_LONG
+            ).show()
+        }
         Log.d("ERROR", error.message.toString())
+        presenter.onErrorDrink()
     }
 
 

@@ -10,6 +10,7 @@ import ru.rumigor.drinks.data.drinks.DrinksRepository
 import ru.rumigor.drinks.scheduler.Schedulers
 import ru.rumigor.drinks.ui.DrinksViewModel
 import ru.rumigor.drinks.ui.drink.DrinkScreen
+import ru.rumigor.drinks.ui.main.MainScreen
 
 class DrinksPresenter(
     private val drinkName: String,
@@ -65,6 +66,10 @@ class DrinksPresenter(
 
     override fun onDestroy() {
         disposables.dispose()
+    }
+
+    fun onErrorDrink() {
+        router.navigateTo(MainScreen)
     }
 
 

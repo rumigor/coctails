@@ -24,7 +24,8 @@ class MainFragment : AbsFragment(R.layout.view_main_fragment), MainView {
             MainFragment()
                 .arguments()
 
-        }
+    }
+
     @Inject
     lateinit var router: Router
 

@@ -13,7 +13,6 @@ import io.reactivex.rxkotlin.plusAssign
 import ru.rumigor.drinks.data.network.NetworkState
 import ru.rumigor.drinks.data.network.NetworkStateObservable
 import ru.rumigor.drinks.ui.abs.AbsActivity
-import ru.rumigor.drinks.ui.drinks.DrinksScreen
 import ru.rumigor.drinks.ui.main.MainScreen
 
 import java.util.concurrent.TimeUnit
@@ -50,10 +49,6 @@ class MainActivity : AbsActivity() {
         disposables +=
             connect.delay(32L, TimeUnit.SECONDS, AndroidSchedulers.mainThread())
                 .subscribe { onNext(1, it) }
-        disposables += connect.delay(16L, TimeUnit.SECONDS, AndroidSchedulers.mainThread())
-            .subscribe { onNext(2, it) }
-        disposables += connect.delay(8L, TimeUnit.SECONDS, AndroidSchedulers.mainThread())
-            .subscribe { onNext(3, it) }
     }
 
     private fun onNext(no: Int, state: NetworkState) {
