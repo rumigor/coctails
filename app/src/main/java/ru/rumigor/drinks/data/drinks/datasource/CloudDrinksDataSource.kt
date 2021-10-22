@@ -36,4 +36,11 @@ class CloudDrinksDataSource @Inject constructor(
                 it.drinks
             }
 
+    override fun getDrinksByIngredients(query: String): Observable<List<Drink>> =
+        drinksApi
+            .getDrinksByIngredients(query)
+            .toObservable()
+            .map{
+                it.drinks
+            }
 }

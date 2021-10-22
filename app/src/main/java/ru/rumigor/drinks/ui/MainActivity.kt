@@ -60,6 +60,7 @@ class MainActivity : AbsActivity() {
         super.onPause()
     }
 
+
     override fun onDestroy() {
         super.onDestroy()
 

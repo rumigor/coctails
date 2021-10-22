@@ -17,12 +17,12 @@ class DrinksPresenter(
     private val drinksRepository: DrinksRepository,
     private val router: Router,
     private val schedulers: Schedulers,
+    private val query: String
 ) : MvpPresenter<DrinksView>() {
 
     private val disposables = CompositeDisposable()
 
     override fun onFirstViewAttach() =
-
         when (drinkName) {
             "popular" -> disposables +=
                 drinksRepository
@@ -38,6 +38,18 @@ class DrinksPresenter(
             "random" -> disposables +=
                 drinksRepository
                     .getRandomDrinks()
+                    .observeOn(schedulers.background())
+                    .map { drinks -> drinks.map(DrinksViewModel.Mapper::map) }
+                    .observeOn(schedulers.main())
+                    .subscribeOn(schedulers.background())
+                    .subscribe(
+                        viewState::showDrinks,
+                        viewState::showError
+                    )
+            "ingredients" ->
+                disposables +=
+                drinksRepository
+                    .getDrinksByIngredients(query)
                     .observeOn(schedulers.background())
                     .map { drinks -> drinks.map(DrinksViewModel.Mapper::map) }
                     .observeOn(schedulers.main())

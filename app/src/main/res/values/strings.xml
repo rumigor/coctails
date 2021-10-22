@@ -1,9 +1,11 @@
 <resources>
     <string name="app_name">Cocktails</string>
-    <string name="find_drink">Find Drink</string>
+    <string name="find_drink">Find Drink by Name</string>
     <string name="the_20_most_popular_cocktails">The 20 most popular cocktails</string>
     <string name="get_10_random_drinks">Get 10 Random Drinks</string>
     <string name="alcoholic_non_alcoholic">Alcoholic/Non-Alcoholic:</string>
     <string name="ingredients">Ingredients: </string>
     <string name="how_to_make">How to make:</string>
+    <string name="find_drinks_by_ingredients">Find drinks by ingredients</string>
+    <string name="start_search">Start Search</string>
 </resources>

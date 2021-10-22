@@ -19,12 +19,14 @@ class CacheDrinksDataSourceImpl @Inject constructor(
             .fetchDrinks()
 
     override fun getDrinkByName(drinkName: String): Observable<List<Drink>> =
-        drinksStorage
-            .drinksDao()
-            .fetchDrinks()
+        getDrinks()
 
     override fun getRandomDrinks(): Observable<List<Drink>> =
         getDrinks()
+
+    override fun getDrinksByIngredients(query: String): Observable<List<Drink>> =
+        getDrinks()
+
 
     override fun retain(drinks: List<Drink>): Single<List<Drink>> =
         drinksStorage

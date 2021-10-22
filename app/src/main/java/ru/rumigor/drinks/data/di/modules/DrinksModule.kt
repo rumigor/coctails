@@ -6,13 +6,13 @@ import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import ru.rumigor.drinks.data.drinks.DrinksRepository
 import ru.rumigor.drinks.data.drinks.DrinksRepositoryImpl
-import ru.rumigor.drinks.data.drinks.datasource.CacheDrinksDataSource
-import ru.rumigor.drinks.data.drinks.datasource.CacheDrinksDataSourceImpl
-import ru.rumigor.drinks.data.drinks.datasource.CloudDrinksDataSource
-import ru.rumigor.drinks.data.drinks.datasource.DrinksDataSource
+import ru.rumigor.drinks.data.drinks.IngredientsRepository
+import ru.rumigor.drinks.data.drinks.IngredientsRepositoryImpl
+import ru.rumigor.drinks.data.drinks.datasource.*
 import ru.rumigor.drinks.ui.MainActivity
 import ru.rumigor.drinks.ui.drink.DrinkFragment
 import ru.rumigor.drinks.ui.drinks.DrinksFragment
+import ru.rumigor.drinks.ui.ingredients.IngredientsFragment
 import ru.rumigor.drinks.ui.main.MainFragment
 import javax.inject.Singleton
 
@@ -27,10 +27,24 @@ interface DrinksModule{
     fun bindDrinkFragment(): DrinkFragment
     @ContributesAndroidInjector
     fun bindMainFragment(): MainFragment
+    @ContributesAndroidInjector
+    fun bindIngredientsFragment(): IngredientsFragment
 
     @Singleton
     @Binds
     fun bindDrinksRepository(repository: DrinksRepositoryImpl): DrinksRepository
+    @Singleton
+    @Binds
+    fun bindIngredientsRepository(ingredientsRepository: IngredientsRepositoryImpl): IngredientsRepository
+
+    @Singleton
+    @Binds
+    fun bindIngredientsDataSource(ingredientsDataSource: CloudIngredientsSource): IngredientsDataSource
+
+    @Singleton
+    @Binds
+    fun bindCacheIngredientsDataSource(ingredientsDataSourceImpl: CacheIngredientsDataSourceImpl): CacheIngredientsDataSource
+
     @Singleton
     @Binds
     fun bindDrinksDataSource(dataSource: CloudDrinksDataSource): DrinksDataSource

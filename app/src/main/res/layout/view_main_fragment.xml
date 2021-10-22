@@ -22,26 +22,33 @@
         android:paddingTop="8pt"
         android:paddingBottom="8pt">
 
-        <TextView
-            android:id="@+id/findDrinkTitle"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center|center_vertical"
-            android:layout_weight="1"
-            android:background="#FFFFFF"
-            android:text="@string/find_drink"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
         <SearchView
             android:id="@+id/search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#FFFFFF"
-            >
+            android:queryHint="@string/find_drink">
+
+            <TextView
+                android:id="@+id/findDrinkTitle"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center|center_vertical"
+                android:layout_weight="1"
+                android:background="#FFFFFF"
+                android:text="@string/find_drink"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
         </SearchView>
     </LinearLayout>
+
+    <Button
+        android:id="@+id/loadIngredients"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/find_drinks_by_ingredients" />
 
     <Button
         android:id="@+id/topCocktails"
@@ -50,10 +57,14 @@
         android:text="@string/the_20_most_popular_cocktails"
         android:textSize="16sp" />
 
+
+
     <Button
         android:id="@+id/randomDrinks"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/get_10_random_drinks" />
+
+
 
 </LinearLayout>

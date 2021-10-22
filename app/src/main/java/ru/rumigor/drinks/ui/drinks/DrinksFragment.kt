@@ -26,14 +26,19 @@ class DrinksFragment : AbsFragment(R.layout.view_drinks), DrinksView, DrinksAdap
     companion object {
 
         private const val ARG_DRINK_NAME = "arg_drink_name"
+        private const val ARG_INGRD_NAME = "arg_ingrd_name"
 
-        fun newInstance(drinkName: String): Fragment =
+        fun newInstance(drinkName: String, query: String): Fragment =
             DrinksFragment()
-                .arguments(ARG_DRINK_NAME to drinkName)
+                .arguments(ARG_DRINK_NAME to drinkName, ARG_INGRD_NAME to query)
     }
 
     private val drinkName: String by lazy {
         arguments?.getString(ARG_DRINK_NAME).orEmpty()
+    }
+
+    private val query: String by lazy {
+        arguments?.getString(ARG_INGRD_NAME).orEmpty()
     }
 
     @Inject
@@ -50,7 +55,8 @@ class DrinksFragment : AbsFragment(R.layout.view_drinks), DrinksView, DrinksAdap
             drinksRepository = drinksRepository,
             router = router,
             schedulers = schedulers,
-            drinkName = drinkName
+            drinkName = drinkName,
+            query = query
         )
     }
 

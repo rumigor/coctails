@@ -21,6 +21,8 @@ fun Fragment.arguments(vararg arguments: Pair<String, Any>): Fragment {
     return this
 }
 
+
+
 @Suppress("IMPLICIT_CAST_TO_ANY")
 fun TextView.setStartDrawableCircleImageFromUri(uri: String, placeholder: Int = 0) {
     val glideUrl = if (uri.isEmpty()) placeholder else GlideUrl(uri)

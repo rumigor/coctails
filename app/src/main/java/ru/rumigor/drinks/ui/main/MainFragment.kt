@@ -3,6 +3,7 @@ package ru.rumigor.drinks.ui.main
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
@@ -12,9 +13,11 @@ import moxy.ktx.moxyPresenter
 import ru.rumigor.drinks.R
 import ru.rumigor.drinks.arguments
 import ru.rumigor.drinks.data.drinks.DrinksRepository
+import ru.rumigor.drinks.data.drinks.IngredientsRepository
 import ru.rumigor.drinks.ui.abs.AbsFragment
 import ru.rumigor.drinks.databinding.ViewMainFragmentBinding
 import ru.rumigor.drinks.scheduler.Schedulers
+import ru.rumigor.drinks.ui.IngredientsViewModel
 import javax.inject.Inject
 
 class MainFragment : AbsFragment(R.layout.view_main_fragment), MainView {
@@ -35,20 +38,29 @@ class MainFragment : AbsFragment(R.layout.view_main_fragment), MainView {
     @Inject
     lateinit var drinksRepository: DrinksRepository
 
+    @Inject
+    lateinit var ingredientsRepository: IngredientsRepository
+
 
     @Suppress("unused")
     private val presenter: MainPresenter by moxyPresenter {
         MainPresenter(
             router = router,
             schedulers = schedulers,
-            drinksRepository = drinksRepository
+            drinksRepository = drinksRepository,
         )
     }
 
     private val viewBiding: ViewMainFragmentBinding by viewBinding()
 
+    private var ingredientsList = mutableListOf<String>()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewBiding.loadIngredients.setOnClickListener {
+            presenter.displayIngredients()
+        }
 
         viewBiding.topCocktails.setOnClickListener {
             presenter.displayTopDrinks()
@@ -71,6 +83,7 @@ class MainFragment : AbsFragment(R.layout.view_main_fragment), MainView {
 
         })
     }
+
 
     override fun showError(error: Throwable) {
         Toast.makeText(requireContext(), error.message, Toast.LENGTH_LONG).show()

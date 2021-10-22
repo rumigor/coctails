@@ -3,10 +3,9 @@ package ru.rumigor.drinks.data.api
 
 import io.reactivex.Single
 import retrofit2.http.GET
-import retrofit2.http.Path
 import retrofit2.http.Query
-import ru.rumigor.drinks.data.model.Drink
 import ru.rumigor.drinks.data.model.Drinks
+import ru.rumigor.drinks.data.model.Ingredients
 
 
 interface DrinksApi {
@@ -20,6 +19,11 @@ interface DrinksApi {
     @GET("/randomselection.php")
     fun getRandomDrinks(): Single<Drinks>
 
+    @GET("/list.php")
+    fun getIngredientsList(@Query("i")index:String): Single<Ingredients>
+
+    @GET ("/filter.php")
+    fun getDrinksByIngredients(@Query("i")query:String): Single<Drinks>
 
 
 }
