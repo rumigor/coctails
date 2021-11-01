@@ -6,9 +6,8 @@ import io.reactivex.rxkotlin.plusAssign
 import moxy.MvpPresenter
 import ru.rumigor.drinks.data.drinks.IngredientsRepository
 import ru.rumigor.drinks.scheduler.Schedulers
-import ru.rumigor.drinks.ui.DrinksViewModel
 import ru.rumigor.drinks.ui.IngredientsViewModel
-import ru.rumigor.drinks.ui.drinks.DrinksScreen
+import ru.rumigor.drinks.ui.cocktails.CocktailScreen
 
 
 class IngredientsPresenter (
@@ -19,7 +18,8 @@ class IngredientsPresenter (
     private val disposables = CompositeDisposable()
 
     fun showDrinks(query: String) {
-        router.navigateTo(DrinksScreen("ingredients", query))
+
+        router.navigateTo(CocktailScreen("ingredients", query))
     }
 
     override fun onDestroy() {
@@ -40,4 +40,49 @@ class IngredientsPresenter (
                 )
     }
 
+    fun filterIngredients(strIngredient: String) {
+        disposables +=
+            ingredientsRepository
+                .filterIngredients(strIngredient)
+                .observeOn(schedulers.background())
+                .map { ingredients -> ingredients.map(IngredientsViewModel.Mapper::map) }
+                .observeOn(schedulers.main())
+                .subscribeOn(schedulers.background())
+                .subscribe(
+                    viewState::loadIngredients,
+                    viewState::showError
+                )
+    }
+
+    fun loadAllIngredients(){
+        disposables +=
+            ingredientsRepository
+                .getIngredientsListFromCache()
+                .observeOn(schedulers.background())
+                .map{ingredients -> ingredients.map(IngredientsViewModel.Mapper::map)}
+                .observeOn(schedulers.main())
+                .subscribeOn(schedulers.background())
+                .subscribe(
+                    viewState::loadIngredients,
+                    viewState::showError
+                )
+    }
+
+    fun updateStatus(strIngredient: String, checked: Boolean){
+        disposables +=
+            ingredientsRepository
+                .updateStatus(strIngredient, checked)
+                .observeOn(schedulers.main())
+                .subscribeOn(schedulers.background())
+                .subscribe()
+    }
+
+    fun deselect() {
+        disposables +=
+            ingredientsRepository
+                .deselect()
+                .observeOn(schedulers.main())
+                .subscribeOn(schedulers.background())
+                .subscribe()
+    }
 }

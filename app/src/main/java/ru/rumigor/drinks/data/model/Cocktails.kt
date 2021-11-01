@@ -2,8 +2,7 @@ package ru.rumigor.drinks.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class Ingredients(
+data class Cocktails (
     @SerializedName("drinks")
-    val ingredients: List<Ingredient>,
-
-)
+    val drinks: List<Cocktail>
+        )

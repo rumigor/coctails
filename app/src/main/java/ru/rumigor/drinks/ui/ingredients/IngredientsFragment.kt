@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.github.terrakok.cicerone.Router
@@ -45,7 +46,7 @@ class IngredientsFragment: AbsFragment(R.layout.view_searchbyingredients), Ingre
 
     private val viewBinding: ViewSearchbyingredientsBinding by viewBinding()
     private val ingredientsAdapter = IngredientsAdapter(delegate = this)
-    private var stringBuilder = StringBuilder()
+    private var stringBuffer = StringBuffer()
 
 
 
@@ -55,30 +56,46 @@ class IngredientsFragment: AbsFragment(R.layout.view_searchbyingredients), Ingre
     }
 
     override fun onIngredientSelected(ingredient: String) {
-        stringBuilder.append("$ingredient,")
+        stringBuffer.append(",$ingredient")
+        viewBinding.query.text = stringBuffer
     }
 
     override fun onIngredientDeselected(ingredient: String) {
-        val regex = "[^$ingredient,]"
-        val sb = StringBuilder()
-        val pattern = Pattern.compile(regex, Pattern.MULTILINE)
-        val matcher = pattern.matcher(stringBuilder)
+        val text: String = stringBuffer.toString().replace(",$ingredient", "")
+        stringBuffer = StringBuffer(text)
+        viewBinding.query.text = text
+        println(stringBuffer)
+    }
 
-        while (matcher.find()) {
-            sb.append(matcher.group(0))
-        }
-        stringBuilder = sb
+    override fun updateStatus(strIngredient: String, checked: Boolean) {
+        presenter.updateStatus(strIngredient, checked)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewBinding.ingredientsList.adapter = ingredientsAdapter
         viewBinding.searchButton.setOnClickListener {
-            if (stringBuilder.isNotEmpty()) {
-                stringBuilder.deleteCharAt(stringBuilder.lastIndex)
-                print(stringBuilder)
-                presenter.showDrinks(stringBuilder.toString())
+            if (stringBuffer.isNotEmpty()) {
+                stringBuffer.deleteCharAt(0)
+                presenter.deselect()
+                presenter.showDrinks(stringBuffer.toString())
+                stringBuffer = StringBuffer("")
             }
+        }
+        viewBinding.filter.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+            android.widget.SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+               query?.let { presenter.filterIngredients(query) }
+                return false
+            }
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return true
+            }
+        }
+        )
+        viewBinding.filter.setOnCloseListener{
+            presenter.loadAllIngredients()
+            return@setOnCloseListener true
         }
     }
 

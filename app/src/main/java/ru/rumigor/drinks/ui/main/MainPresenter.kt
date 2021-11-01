@@ -5,9 +5,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign
 import moxy.MvpPresenter
 import ru.rumigor.drinks.data.drinks.DrinksRepository
-import ru.rumigor.drinks.data.drinks.IngredientsRepository
 import ru.rumigor.drinks.scheduler.Schedulers
-import ru.rumigor.drinks.ui.IngredientsViewModel
 import ru.rumigor.drinks.ui.drinks.DrinksScreen
 import ru.rumigor.drinks.ui.ingredients.IngredientsScreen
 

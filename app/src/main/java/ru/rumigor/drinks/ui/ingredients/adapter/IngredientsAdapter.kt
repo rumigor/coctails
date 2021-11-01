@@ -10,13 +10,11 @@ import ru.rumigor.drinks.ui.IngredientsViewModel
 class IngredientsAdapter (private val delegate: Delegate?):
 ListAdapter<IngredientsViewModel, IngredientViewHolder>(IngredientDiff){
 
-    private var items = mutableListOf<Model>()
-    var itemStateArray = SparseBooleanArray()
-
 
     interface Delegate {
         fun onIngredientSelected(ingredient: String)
         fun onIngredientDeselected(ingredient: String)
+        fun updateStatus(strIngredient:String, checked: Boolean)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IngredientViewHolder =
@@ -28,11 +26,8 @@ ListAdapter<IngredientsViewModel, IngredientViewHolder>(IngredientDiff){
         )
 
     override fun onBindViewHolder(holder: IngredientViewHolder, position: Int) {
+
         holder.bind(getItem(position), delegate)
     }
 
-    fun loadItems(ingredients: MutableList<Model>){
-        this.items = ingredients
-        notifyDataSetChanged()
-    }
 }

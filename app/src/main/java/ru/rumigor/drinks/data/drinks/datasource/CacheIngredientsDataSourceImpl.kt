@@ -1,5 +1,6 @@
 package ru.rumigor.drinks.data.drinks.datasource
 
+import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
 import ru.rumigor.drinks.data.InMemory
@@ -22,10 +23,23 @@ class CacheIngredientsDataSourceImpl @Inject constructor(
             .retainIng(ingredient)
             .andThen(Single.just(ingredient))
 
+    override fun filterIngredients(strIngredient: String): Observable<List<Ingredient>> =
+        drinksStorage
+            .drinksDao()
+            .filterIngredients(strIngredient)
 
+    override fun clearCache(): Completable =
+        drinksStorage
+            .drinksDao()
+            .deleteAllIngredients()
 
     override fun getIngredientsList(): Observable<List<Ingredient>> =
         drinksStorage
             .drinksDao()
             .fetchIngredients()
+
+    override fun deselect(): Completable =
+        drinksStorage
+            .drinksDao()
+            .deselect()
 }

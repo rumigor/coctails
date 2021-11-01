@@ -5,6 +5,7 @@ import io.reactivex.Maybe
 import io.reactivex.Observable
 import ru.rumigor.drinks.data.drinks.datasource.CacheDrinksDataSource
 import ru.rumigor.drinks.data.drinks.datasource.DrinksDataSource
+import ru.rumigor.drinks.data.model.Cocktail
 import ru.rumigor.drinks.data.model.Drink
 import javax.inject.Inject
 
@@ -18,8 +19,9 @@ class DrinksRepositoryImpl @Inject constructor(
             cloud.getDrinks().flatMapSingle(cache::retain)
         )
 
-    override fun getDrinkById(drinkID: String): Maybe<Drink> =
-        cache.getDrinkById(drinkID)
+    override fun getDrinkById(drinkID: String): Observable<Drink> =
+        cloud.getDrinkById(drinkID).flatMapSingle(cache::retain)
+
 
     override fun getDrinkByName(drinkName: String): Observable<List<Drink>> =
         Observable.merge(
@@ -36,9 +38,9 @@ class DrinksRepositoryImpl @Inject constructor(
     override fun clearCache(): Completable =
         cache.clearCache()
 
-    override fun getDrinksByIngredients(query: String): Observable<List<Drink>> =
+    override fun getDrinksByIngredients(query: String): Observable<List<Cocktail>> =
         Observable.merge(
             cache.getDrinksByIngredients(query),
-            cloud.getDrinksByIngredients(query).flatMapSingle(cache::retain)
+            cloud.getDrinksByIngredients(query)
         )
 }

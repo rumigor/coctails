@@ -11,6 +11,7 @@ import ru.rumigor.drinks.data.drinks.IngredientsRepositoryImpl
 import ru.rumigor.drinks.data.drinks.datasource.*
 import ru.rumigor.drinks.ui.MainActivity
 import ru.rumigor.drinks.ui.drink.DrinkFragment
+import ru.rumigor.drinks.ui.cocktails.CocktailFragment
 import ru.rumigor.drinks.ui.drinks.DrinksFragment
 import ru.rumigor.drinks.ui.ingredients.IngredientsFragment
 import ru.rumigor.drinks.ui.main.MainFragment
@@ -29,6 +30,8 @@ interface DrinksModule{
     fun bindMainFragment(): MainFragment
     @ContributesAndroidInjector
     fun bindIngredientsFragment(): IngredientsFragment
+    @ContributesAndroidInjector
+    fun bindCocktailsFragment(): CocktailFragment
 
     @Singleton
     @Binds

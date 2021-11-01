@@ -3,13 +3,14 @@ package ru.rumigor.drinks.data.drinks
 import io.reactivex.Completable
 import io.reactivex.Maybe
 import io.reactivex.Observable
+import ru.rumigor.drinks.data.model.Cocktail
 import ru.rumigor.drinks.data.model.Drink
 import ru.rumigor.drinks.data.model.Drinks
 
 interface DrinksRepository {
     fun getDrinks(): Observable<List<Drink>>
 
-    fun getDrinkById(drinkID: String): Maybe<Drink>
+    fun getDrinkById(drinkID: String): Observable<Drink>
 
     fun getDrinkByName(drinkName: String): Observable<List<Drink>>
 
@@ -17,5 +18,5 @@ interface DrinksRepository {
 
     fun clearCache(): Completable
 
-    fun getDrinksByIngredients(query:String): Observable<List<Drink>>
+    fun getDrinksByIngredients(query:String): Observable<List<Cocktail>>
 }

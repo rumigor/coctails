@@ -1,4 +1,4 @@
-package ru.rumigor.drinks.ui.drinks
+package ru.rumigor.drinks.ui.cocktails
 
 
 import android.os.Bundle
@@ -16,29 +16,29 @@ import ru.rumigor.drinks.arguments
 import ru.rumigor.drinks.data.drinks.DrinksRepository
 import ru.rumigor.drinks.databinding.ViewDrinksBinding
 import ru.rumigor.drinks.scheduler.Schedulers
-import ru.rumigor.drinks.ui.DrinksViewModel
+import ru.rumigor.drinks.ui.CocktailsViewModel
 import ru.rumigor.drinks.ui.abs.AbsFragment
-import ru.rumigor.drinks.ui.cocktails.CocktailFragment
-import ru.rumigor.drinks.ui.cocktails.CocktailsPresenter
-import ru.rumigor.drinks.ui.cocktails.CocktailsView
-import ru.rumigor.drinks.ui.drinks.adapter.DrinksAdapter
 import javax.inject.Inject
 
-class DrinksFragment : AbsFragment(R.layout.view_drinks), DrinksView, DrinksAdapter.Delegate {
+class CocktailFragment : AbsFragment(R.layout.view_drinks), CocktailsView, CocktailsAdapter.Delegate {
 
     companion object {
 
         private const val ARG_DRINK_NAME = "arg_drink_name"
+        private const val ARG_INGRD_NAME = "arg_ingrd_name"
 
         fun newInstance(drinkName: String, query: String): Fragment =
-            DrinksFragment()
-                .arguments(ARG_DRINK_NAME to drinkName)
+            CocktailFragment()
+                .arguments(ARG_DRINK_NAME to drinkName, ARG_INGRD_NAME to query)
     }
 
     private val drinkName: String by lazy {
         arguments?.getString(ARG_DRINK_NAME).orEmpty()
     }
 
+    private val query: String by lazy {
+        arguments?.getString(ARG_INGRD_NAME).orEmpty()
+    }
 
     @Inject
     lateinit var router: Router
@@ -49,17 +49,18 @@ class DrinksFragment : AbsFragment(R.layout.view_drinks), DrinksView, DrinksAdap
     @Inject
     lateinit var drinksRepository: DrinksRepository
 
-    private val presenter: DrinksPresenter by moxyPresenter {
-        DrinksPresenter(
+    private val presenter: CocktailsPresenter by moxyPresenter {
+        CocktailsPresenter(
             drinksRepository = drinksRepository,
             router = router,
             schedulers = schedulers,
-            drinkName = drinkName
+            drinkName = drinkName,
+            query = query
         )
     }
 
     private val viewBinding: ViewDrinksBinding by viewBinding()
-    private val drinksAdapter = DrinksAdapter(delegate = this)
+    private val drinksAdapter = CocktailsAdapter(delegate = this)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -67,7 +68,7 @@ class DrinksFragment : AbsFragment(R.layout.view_drinks), DrinksView, DrinksAdap
         viewBinding.drinks.adapter = drinksAdapter
     }
 
-    override fun showDrinks(drinks: List<DrinksViewModel>) {
+    override fun showDrinks(drinks: List<CocktailsViewModel>) {
         drinksAdapter.submitList(drinks)
     }
 
@@ -84,8 +85,8 @@ class DrinksFragment : AbsFragment(R.layout.view_drinks), DrinksView, DrinksAdap
     }
 
 
-    override fun onDrinkPicked(drink: DrinksViewModel) {
-        presenter.displayDrink(drink)
+    override fun onDrinkPicked(cocktail: CocktailsViewModel) {
+        presenter.displayDrink(cocktail)
     }
 
 

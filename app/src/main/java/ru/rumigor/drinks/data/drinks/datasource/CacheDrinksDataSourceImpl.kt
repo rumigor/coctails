@@ -5,6 +5,7 @@ import io.reactivex.Maybe
 import io.reactivex.Observable
 import io.reactivex.Single
 import ru.rumigor.drinks.data.InMemory
+import ru.rumigor.drinks.data.model.Cocktail
 import ru.rumigor.drinks.data.model.Drink
 import ru.rumigor.drinks.data.storage.DrinksStorage
 import javax.inject.Inject
@@ -24,8 +25,10 @@ class CacheDrinksDataSourceImpl @Inject constructor(
     override fun getRandomDrinks(): Observable<List<Drink>> =
         getDrinks()
 
-    override fun getDrinksByIngredients(query: String): Observable<List<Drink>> =
-        getDrinks()
+    override fun getDrinksByIngredients(query: String): Observable<List<Cocktail>> =
+        drinksStorage
+            .drinksDao()
+            .fetchCocktails()
 
 
     override fun retain(drinks: List<Drink>): Single<List<Drink>> =
@@ -40,13 +43,26 @@ class CacheDrinksDataSourceImpl @Inject constructor(
             .retain(drink)
             .andThen(Single.just(drink))
 
-    override fun getDrinkById(idDrink: String): Maybe<Drink> = drinksStorage
+    override fun retainC(cocktails: List<Cocktail>, query: String): Single<List<Cocktail>> =
+        drinksStorage
             .drinksDao()
-            .fetchDrinksById(idDrink)
-            .toMaybe()
+            .retainC(cocktails)
+            .andThen(getDrinksByIngredients(query).firstOrError())
+
+    override fun retainC(cocktail: Cocktail): Single<Cocktail> =
+        drinksStorage
+            .drinksDao()
+            .retainC(cocktail)
+            .andThen(Single.just(cocktail))
+
+    override fun getDrinkById(idDrink: String): Observable<Drink> =
+        drinksStorage
+        .drinksDao()
+        .fetchDrinksById(idDrink)
+        .toObservable()
 
     override fun clearCache(): Completable =
-            drinksStorage
-                .drinksDao()
-                .deleteAll()
+        drinksStorage
+            .drinksDao()
+            .deleteAll()
 }
