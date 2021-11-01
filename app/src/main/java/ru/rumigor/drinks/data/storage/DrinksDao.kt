@@ -15,9 +15,6 @@ interface DrinksDao {
     @Query("SELECT * FROM drinks")
     fun fetchDrinks(): Observable<List<Drink>>
 
-    @Query("SELECT * FROM cocktails")
-    fun fetchCocktails(): Observable<List<Cocktail>>
-
     @Query("SELECT * FROM drinks WHERE idDrink LIKE :idDrink LIMIT 1")
     fun fetchDrinksById(idDrink: String): Single<Drink>
 

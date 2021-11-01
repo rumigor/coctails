@@ -10,7 +10,7 @@ interface DrinksDataSource {
     fun getDrinks(): Observable<List<Drink>>
     fun getDrinkByName(drinkName: String): Observable<List<Drink>>
     fun getRandomDrinks(): Observable<List<Drink>>
-    fun getDrinksByIngredients(query: String): Observable<List<Cocktail>>
+    fun getDrinksByIngredients(query: String): Observable<List<Drink>>
     fun getDrinkById (idDrink:String): Observable<Drink>
 
 }

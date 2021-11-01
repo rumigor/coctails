@@ -7,7 +7,6 @@ import ru.rumigor.drinks.click
 import ru.rumigor.drinks.databinding.ViewDrinkBinding
 import ru.rumigor.drinks.setStartDrawableCircleImageFromUri
 import ru.rumigor.drinks.ui.DrinksViewModel
-import ru.rumigor.drinks.ui.cocktails.adapter.CocktailsAdapter
 
 class DrinkViewHolder(view: View) : ViewHolder(view) {
 

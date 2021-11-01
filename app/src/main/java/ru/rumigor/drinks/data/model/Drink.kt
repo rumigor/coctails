@@ -15,10 +15,10 @@ data class Drink(
     val strDrink: String,
     @ColumnInfo(name = "strAlcoholic")
     @SerializedName("strAlcoholic")
-    val strAlcoholic: String,
+    val strAlcoholic: String?,
     @ColumnInfo(name = "strInstructions")
     @SerializedName("strInstructions")
-    val strInstructions: String,
+    val strInstructions: String?,
     @ColumnInfo(name = "avatar")
     @SerializedName("strDrinkThumb")
     val strDrinkThumb: String,

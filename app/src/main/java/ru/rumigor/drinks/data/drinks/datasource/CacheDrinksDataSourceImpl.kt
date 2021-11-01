@@ -25,10 +25,10 @@ class CacheDrinksDataSourceImpl @Inject constructor(
     override fun getRandomDrinks(): Observable<List<Drink>> =
         getDrinks()
 
-    override fun getDrinksByIngredients(query: String): Observable<List<Cocktail>> =
+    override fun getDrinksByIngredients(query: String): Observable<List<Drink>> =
         drinksStorage
             .drinksDao()
-            .fetchCocktails()
+            .fetchDrinks()
 
 
     override fun retain(drinks: List<Drink>): Single<List<Drink>> =
@@ -43,17 +43,7 @@ class CacheDrinksDataSourceImpl @Inject constructor(
             .retain(drink)
             .andThen(Single.just(drink))
 
-    override fun retainC(cocktails: List<Cocktail>, query: String): Single<List<Cocktail>> =
-        drinksStorage
-            .drinksDao()
-            .retainC(cocktails)
-            .andThen(getDrinksByIngredients(query).firstOrError())
 
-    override fun retainC(cocktail: Cocktail): Single<Cocktail> =
-        drinksStorage
-            .drinksDao()
-            .retainC(cocktail)
-            .andThen(Single.just(cocktail))
 
     override fun getDrinkById(idDrink: String): Observable<Drink> =
         drinksStorage

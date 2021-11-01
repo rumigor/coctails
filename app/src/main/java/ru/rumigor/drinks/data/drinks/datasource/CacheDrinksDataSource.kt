@@ -11,8 +11,6 @@ interface CacheDrinksDataSource : DrinksDataSource {
 
     fun retain(drinks: List<Drink>): Single<List<Drink>>
     fun retain(drink: Drink): Single<Drink>
-    fun retainC(cocktails: List<Cocktail>, query: String): Single<List<Cocktail>>
-    fun retainC(cocktail: Cocktail): Single<Cocktail>
     fun clearCache(): Completable
 
 }

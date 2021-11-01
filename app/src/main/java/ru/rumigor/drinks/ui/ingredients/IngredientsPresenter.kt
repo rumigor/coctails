@@ -7,7 +7,7 @@ import moxy.MvpPresenter
 import ru.rumigor.drinks.data.drinks.IngredientsRepository
 import ru.rumigor.drinks.scheduler.Schedulers
 import ru.rumigor.drinks.ui.IngredientsViewModel
-import ru.rumigor.drinks.ui.cocktails.CocktailScreen
+import ru.rumigor.drinks.ui.drinks.DrinksScreen
 
 
 class IngredientsPresenter (
@@ -19,7 +19,7 @@ class IngredientsPresenter (
 
     fun showDrinks(query: String) {
 
-        router.navigateTo(CocktailScreen("ingredients", query))
+        router.navigateTo(DrinksScreen("ingredientSearch", query))
     }
 
     override fun onDestroy() {

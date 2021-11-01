@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import moxy.ktx.moxyPresenter
 
-import ru.rumigor.drinks.ui.cocktails.adapter.CocktailsAdapter
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.github.terrakok.cicerone.Router
 import ru.rumigor.drinks.R
@@ -18,9 +17,6 @@ import ru.rumigor.drinks.databinding.ViewDrinksBinding
 import ru.rumigor.drinks.scheduler.Schedulers
 import ru.rumigor.drinks.ui.DrinksViewModel
 import ru.rumigor.drinks.ui.abs.AbsFragment
-import ru.rumigor.drinks.ui.cocktails.CocktailFragment
-import ru.rumigor.drinks.ui.cocktails.CocktailsPresenter
-import ru.rumigor.drinks.ui.cocktails.CocktailsView
 import ru.rumigor.drinks.ui.drinks.adapter.DrinksAdapter
 import javax.inject.Inject
 
@@ -29,14 +25,19 @@ class DrinksFragment : AbsFragment(R.layout.view_drinks), DrinksView, DrinksAdap
     companion object {
 
         private const val ARG_DRINK_NAME = "arg_drink_name"
+        private const val ARG_DRINK_QUERY = "arg_drink_query"
 
         fun newInstance(drinkName: String, query: String): Fragment =
             DrinksFragment()
-                .arguments(ARG_DRINK_NAME to drinkName)
+                .arguments(ARG_DRINK_NAME to drinkName, ARG_DRINK_QUERY to query)
     }
 
     private val drinkName: String by lazy {
         arguments?.getString(ARG_DRINK_NAME).orEmpty()
+    }
+
+    private val query by lazy{
+        arguments?.getString(ARG_DRINK_QUERY).orEmpty()
     }
 
 
@@ -54,7 +55,8 @@ class DrinksFragment : AbsFragment(R.layout.view_drinks), DrinksView, DrinksAdap
             drinksRepository = drinksRepository,
             router = router,
             schedulers = schedulers,
-            drinkName = drinkName
+            drinkName = drinkName,
+            query = query
         )
     }
 

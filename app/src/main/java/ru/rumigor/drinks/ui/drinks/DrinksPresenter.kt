@@ -9,11 +9,11 @@ import io.reactivex.rxkotlin.plusAssign
 import ru.rumigor.drinks.data.drinks.DrinksRepository
 import ru.rumigor.drinks.scheduler.Schedulers
 import ru.rumigor.drinks.ui.DrinksViewModel
-import ru.rumigor.drinks.ui.cocktails.CocktailsView
 import ru.rumigor.drinks.ui.drink.DrinkScreen
 import ru.rumigor.drinks.ui.main.MainScreen
 
 class DrinksPresenter(
+    private val query: String,
     private val drinkName: String,
     private val drinksRepository: DrinksRepository,
     private val router: Router,
@@ -38,6 +38,17 @@ class DrinksPresenter(
             "random" -> disposables +=
                 drinksRepository
                     .getRandomDrinks()
+                    .observeOn(schedulers.background())
+                    .map { drinks -> drinks.map(DrinksViewModel.Mapper::map) }
+                    .observeOn(schedulers.main())
+                    .subscribeOn(schedulers.background())
+                    .subscribe(
+                        viewState::showDrinks,
+                        viewState::showError
+                    )
+            "ingredientSearch" -> disposables +=
+                drinksRepository
+                    .getDrinksByIngredients(query!!)
                     .observeOn(schedulers.background())
                     .map { drinks -> drinks.map(DrinksViewModel.Mapper::map) }
                     .observeOn(schedulers.main())

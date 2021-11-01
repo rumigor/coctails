@@ -38,7 +38,7 @@ class DrinksRepositoryImpl @Inject constructor(
     override fun clearCache(): Completable =
         cache.clearCache()
 
-    override fun getDrinksByIngredients(query: String): Observable<List<Cocktail>> =
+    override fun getDrinksByIngredients(query: String): Observable<List<Drink>> =
         Observable.merge(
             cache.getDrinksByIngredients(query),
             cloud.getDrinksByIngredients(query)

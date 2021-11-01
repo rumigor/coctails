@@ -24,7 +24,7 @@ interface DrinksApi {
     fun getIngredientsList(@Query("i")index:String): Single<Ingredients>
 
     @GET ("/filter.php")
-    fun getDrinksByIngredients(@Query("i")query:String): Single<Cocktails>
+    fun getDrinksByIngredients(@Query("i")query:String): Single<Drinks>
 
     @GET ("/lookup.php")
     fun getDrinkByID(@Query("i")drinkID: String): Single<Drinks>
