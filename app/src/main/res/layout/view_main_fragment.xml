@@ -74,6 +74,27 @@
                 android:layout_height="wrap_content"
                 android:text="@string/get_10_random_drinks" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/filterByCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="Filter by Category"
+                    android:dropDownSelector="@color/silver"
+                    android:minHeight="48dp" />
+
+                <Button
+                    android:id="@+id/categoryButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Filter by Category" />
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 

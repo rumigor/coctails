@@ -16,4 +16,6 @@ interface DrinksRepository {
     fun clearCache(): Completable
 
     fun getDrinksByIngredients(query:String): Observable<List<Drink>>
+
+    fun getDrinksByCategory(query: String): Observable<List<Drink>>
 }

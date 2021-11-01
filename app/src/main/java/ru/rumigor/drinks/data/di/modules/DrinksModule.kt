@@ -4,10 +4,7 @@ package ru.rumigor.drinks.data.di.modules
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
-import ru.rumigor.drinks.data.drinks.DrinksRepository
-import ru.rumigor.drinks.data.drinks.DrinksRepositoryImpl
-import ru.rumigor.drinks.data.drinks.IngredientsRepository
-import ru.rumigor.drinks.data.drinks.IngredientsRepositoryImpl
+import ru.rumigor.drinks.data.drinks.*
 import ru.rumigor.drinks.data.drinks.datasource.*
 import ru.rumigor.drinks.ui.MainActivity
 import ru.rumigor.drinks.ui.drink.DrinkFragment
@@ -29,8 +26,7 @@ interface DrinksModule{
     fun bindMainFragment(): MainFragment
     @ContributesAndroidInjector
     fun bindIngredientsFragment(): IngredientsFragment
-//    @ContributesAndroidInjector
-//    fun bindCocktailsFragment(): CocktailFragment
+
 
     @Singleton
     @Binds
@@ -49,8 +45,16 @@ interface DrinksModule{
 
     @Singleton
     @Binds
+    fun bindDrinkCategoryRepository(drinkCategoryRepository: DrinkCategoryRepositoryImpl): DrinkCategoryRepository
+
+    @Singleton
+    @Binds
     fun bindDrinksDataSource(dataSource: CloudDrinksDataSource): DrinksDataSource
     @Singleton
     @Binds
     fun bindCacheDrinksDataSource(dataSourceImpl: CacheDrinksDataSourceImpl): CacheDrinksDataSource
+
+    @Singleton
+    @Binds
+    fun bindDrinkCategorySource(dataSource: CloudDrinkCategorySource): DrinkCategorySource
 }

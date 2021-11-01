@@ -48,7 +48,18 @@ class DrinksPresenter(
                     )
             "ingredientSearch" -> disposables +=
                 drinksRepository
-                    .getDrinksByIngredients(query!!)
+                    .getDrinksByIngredients(query)
+                    .observeOn(schedulers.background())
+                    .map { drinks -> drinks.map(DrinksViewModel.Mapper::map) }
+                    .observeOn(schedulers.main())
+                    .subscribeOn(schedulers.background())
+                    .subscribe(
+                        viewState::showDrinks,
+                        viewState::showError
+                    )
+            "category" -> disposables +=
+                drinksRepository
+                    .getDrinksByCategory(query)
                     .observeOn(schedulers.background())
                     .map { drinks -> drinks.map(DrinksViewModel.Mapper::map) }
                     .observeOn(schedulers.main())

@@ -49,6 +49,12 @@ class CacheDrinksDataSourceImpl @Inject constructor(
         .fetchDrinksById(idDrink)
         .toObservable()
 
+    override fun getDrinksByCategory(query: String): Observable<List<Drink>> =
+        drinksStorage
+            .drinksDao()
+            .fetchDrinksByCategory(query)
+
+
     override fun clearCache(): Completable =
         drinksStorage
             .drinksDao()

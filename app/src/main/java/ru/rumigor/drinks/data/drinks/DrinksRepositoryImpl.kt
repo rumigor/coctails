@@ -41,4 +41,10 @@ class DrinksRepositoryImpl @Inject constructor(
             cache.getDrinksByIngredients(query),
             cloud.getDrinksByIngredients(query)
         )
+
+    override fun getDrinksByCategory(query: String): Observable<List<Drink>> =
+        Observable.merge(
+            cache.getDrinksByCategory(query),
+            cloud.getDrinksByCategory(query).flatMapSingle(cache::retain)
+        )
 }

@@ -16,7 +16,7 @@ class CloudDrinksDataSource @Inject constructor(
         drinksApi
             .getDrinks()
             .toObservable()
-            .map{
+            .map {
                 it.drinks
             }
 
@@ -24,15 +24,15 @@ class CloudDrinksDataSource @Inject constructor(
         drinksApi
             .getDrinkByName(drinkName)
             .toObservable()
-            .map{
+            .map {
                 it.drinks
             }
 
-        override fun getRandomDrinks(): Observable<List<Drink>> =
+    override fun getRandomDrinks(): Observable<List<Drink>> =
         drinksApi
             .getRandomDrinks()
             .toObservable()
-            .map{
+            .map {
                 it.drinks
             }
 
@@ -40,7 +40,7 @@ class CloudDrinksDataSource @Inject constructor(
         drinksApi
             .getDrinksByIngredients(query)
             .toObservable()
-            .map{
+            .map {
                 it.drinks
             }
 
@@ -50,5 +50,13 @@ class CloudDrinksDataSource @Inject constructor(
             .toObservable()
             .map {
                 it.drinks[0]
+            }
+
+    override fun getDrinksByCategory(query: String): Observable<List<Drink>> =
+        drinksApi
+            .getDrinksByCategory(query)
+            .toObservable()
+            .map {
+                it.drinks
             }
 }
