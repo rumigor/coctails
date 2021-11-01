@@ -5,8 +5,6 @@ import androidx.room.OnConflictStrategy.REPLACE
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
-import ru.rumigor.drinks.data.model.Cocktail
-import ru.rumigor.drinks.data.model.Cocktails
 import ru.rumigor.drinks.data.model.Drink
 import ru.rumigor.drinks.data.model.Ingredient
 
@@ -33,12 +31,6 @@ interface DrinksDao {
     @Update(onConflict = REPLACE)
     fun retainIng(ingredient: Ingredient): Completable
 
-
-    @Insert(onConflict = REPLACE)
-    fun retainC(cocktails: List<Cocktail>): Completable
-
-    @Update(onConflict = REPLACE)
-    fun retainC(cocktail: Cocktail): Completable
 
     @Query("UPDATE ingredients SET checked = 0")
     fun deselect():Completable

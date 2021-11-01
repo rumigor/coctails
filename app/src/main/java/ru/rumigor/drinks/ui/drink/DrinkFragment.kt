@@ -54,6 +54,7 @@ class DrinkFragment : AbsFragment(R.layout.view_drink_fragment), DrinkView {
         viewBinding.drinkTitle.text = drink.strDrink
         viewBinding.alcStatus.text = drink.strAlcoholic
         viewBinding.instruction.text = drink.strInstructions
+        viewBinding.drinkCategory.text = drink.strCategory
         val ingredients = listOf(
             drink.strIngredient1,
             drink.strIngredient2,

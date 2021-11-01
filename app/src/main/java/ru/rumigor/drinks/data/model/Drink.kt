@@ -22,6 +22,9 @@ data class Drink(
     @ColumnInfo(name = "avatar")
     @SerializedName("strDrinkThumb")
     val strDrinkThumb: String,
+    @ColumnInfo(name = "drinkCategory")
+    @SerializedName("strCategory")
+    val strCategory: String?,
     @ColumnInfo(name = "strIngredient1")
     @SerializedName("strIngredient1")
     val strIngredient1: String?,

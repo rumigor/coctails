@@ -1,11 +1,8 @@
 package ru.rumigor.drinks.data.drinks
 
 import io.reactivex.Completable
-import io.reactivex.Maybe
 import io.reactivex.Observable
-import ru.rumigor.drinks.data.model.Cocktail
 import ru.rumigor.drinks.data.model.Drink
-import ru.rumigor.drinks.data.model.Drinks
 
 interface DrinksRepository {
     fun getDrinks(): Observable<List<Drink>>

@@ -1,8 +1,6 @@
 package ru.rumigor.drinks.data.drinks.datasource
 
-import io.reactivex.Maybe
 import io.reactivex.Observable
-import ru.rumigor.drinks.data.model.Cocktail
 import ru.rumigor.drinks.data.model.Drink
 
 interface DrinksDataSource {

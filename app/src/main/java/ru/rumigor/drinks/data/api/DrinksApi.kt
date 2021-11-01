@@ -4,7 +4,6 @@ package ru.rumigor.drinks.data.api
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
-import ru.rumigor.drinks.data.model.Cocktails
 import ru.rumigor.drinks.data.model.Drinks
 import ru.rumigor.drinks.data.model.Ingredients
 

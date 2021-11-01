@@ -57,13 +57,11 @@ class IngredientsFragment: AbsFragment(R.layout.view_searchbyingredients), Ingre
 
     override fun onIngredientSelected(ingredient: String) {
         stringBuffer.append(",$ingredient")
-        viewBinding.query.text = stringBuffer
     }
 
     override fun onIngredientDeselected(ingredient: String) {
         val text: String = stringBuffer.toString().replace(",$ingredient", "")
         stringBuffer = StringBuffer(text)
-        viewBinding.query.text = text
         println(stringBuffer)
     }
 

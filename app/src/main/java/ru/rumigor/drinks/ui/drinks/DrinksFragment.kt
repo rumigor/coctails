@@ -36,7 +36,7 @@ class DrinksFragment : AbsFragment(R.layout.view_drinks), DrinksView, DrinksAdap
         arguments?.getString(ARG_DRINK_NAME).orEmpty()
     }
 
-    private val query by lazy{
+    private val query by lazy {
         arguments?.getString(ARG_DRINK_QUERY).orEmpty()
     }
 
@@ -74,13 +74,11 @@ class DrinksFragment : AbsFragment(R.layout.view_drinks), DrinksView, DrinksAdap
     }
 
     override fun showError(error: Throwable) {
-        if (error.message == "The mapper function returned a null value.") {
-            Toast.makeText(
-                requireContext(),
-                "Sorry, we can't find recipe for this drink:(",
-                Toast.LENGTH_LONG
-            ).show()
-        }
+        Toast.makeText(
+            requireContext(),
+            "Sorry, we can't find recipe for this drink:(",
+            Toast.LENGTH_LONG
+        ).show()
         Log.d("ERROR", error.message.toString())
         presenter.onErrorDrink()
     }

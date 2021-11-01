@@ -2,6 +2,7 @@ package ru.rumigor.drinks.ui
 
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
@@ -52,7 +53,7 @@ class MainActivity : AbsActivity() {
     }
 
     private fun onNext(no: Int, state: NetworkState) {
-        Toast.makeText(this, "$no: NetworkState: $state", Toast.LENGTH_SHORT).show()
+        Log.d("NETWORK_STATE", "$no: NetworkState: $state")
     }
 
     override fun onPause() {

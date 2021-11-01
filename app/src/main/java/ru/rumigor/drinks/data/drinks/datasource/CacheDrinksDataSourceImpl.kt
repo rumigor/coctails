@@ -1,11 +1,9 @@
 package ru.rumigor.drinks.data.drinks.datasource
 
 import io.reactivex.Completable
-import io.reactivex.Maybe
 import io.reactivex.Observable
 import io.reactivex.Single
 import ru.rumigor.drinks.data.InMemory
-import ru.rumigor.drinks.data.model.Cocktail
 import ru.rumigor.drinks.data.model.Drink
 import ru.rumigor.drinks.data.storage.DrinksStorage
 import javax.inject.Inject
