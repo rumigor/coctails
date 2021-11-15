@@ -19,10 +19,9 @@ import ru.rumigor.drinks.data.drinks.IngredientsRepository
 import ru.rumigor.drinks.ui.abs.AbsFragment
 import ru.rumigor.drinks.databinding.ViewMainFragmentBinding
 import ru.rumigor.drinks.scheduler.Schedulers
-import ru.rumigor.drinks.ui.IngredientsViewModel
 import javax.inject.Inject
 
-class MainFragment : AbsFragment(R.layout.view_main_fragment), MainView, AdapterView.OnItemSelectedListener {
+class MainFragment : AbsFragment(R.layout.view_main_fragment), MainView {
     companion object {
 
         fun newInstance(): Fragment =
@@ -93,19 +92,32 @@ class MainFragment : AbsFragment(R.layout.view_main_fragment), MainView, Adapter
     }
 
     override fun showCategories(drinkCategories: List<DrinkCategoryViewModel>) {
-        for (drinkCategory in drinkCategories){
+        for (drinkCategory in drinkCategories) {
             drinkCategoryList.add(drinkCategory.strCategory)
         }
-        val spinnerAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, drinkCategoryList)
-            .also { adapter ->
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                viewBiding.filterByCategory.adapter = adapter
+        val spinnerAdapter =
+            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, drinkCategoryList)
+
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        viewBiding.filterByCategory.adapter = spinnerAdapter
+
+
+
+        viewBiding.categoryButton.setOnClickListener {
+            query?.let { presenter.displayByCategory(it) }
+        }
+
+        viewBiding.filterByCategory.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>,
+                                        view: View, position: Int, id: Long) {
+                query = drinkCategoryList[position]
             }
 
+            override fun onNothingSelected(parent: AdapterView<*>) {
 
+            }
 
-        viewBiding.categoryButton.setOnClickListener{
-            query?.let { presenter.displayByCategory(it) }
         }
     }
 
@@ -114,11 +126,4 @@ class MainFragment : AbsFragment(R.layout.view_main_fragment), MainView, Adapter
         Log.d("ERROR", error.message.toString())
     }
 
-    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        query = drinkCategoryList[position]
-    }
-
-    override fun onNothingSelected(parent: AdapterView<*>?) {
-
-    }
 }
